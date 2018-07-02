@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+let cards = Array.from(document.querySelectorAll('.card'));
 
 /*
  * Display the cards on the page
@@ -9,6 +9,19 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+function shuffleCards () {
+    cards = shuffle(cards);
+    const deck = document.querySelector('.deck');
+    deck.innerHTML = '';
+    for (let i = 0; i < cards.length; i++) {
+        deck.appendChild(cards[i]);
+    }
+}
+
+//Shuffle deck when we click the restart button.
+document.querySelector('.restart').addEventListener('click', function (event) {
+    shuffleCards();
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
