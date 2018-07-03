@@ -14,6 +14,7 @@ function shuffleCards () {
     const deck = document.querySelector('.deck');
     deck.innerHTML = '';
     for (let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('open', 'show', 'match');
         deck.appendChild(cards[i]);
     }
 }
