@@ -4,6 +4,7 @@
 let cards = Array.from(document.querySelectorAll('.card'));
 let openCards = [];
 let moves = 0;
+let matched = 0;
 
 /*
  * Display the cards on the page
@@ -67,6 +68,7 @@ document.querySelector('.deck').addEventListener('click', function (event) {
         checkCards();
         clearQueue();
         incrementMoves();
+        checkForWin();
     }
 });
 
@@ -78,6 +80,7 @@ function checkCards () {
         //Match
         lockCard(card1);
         lockCard(card2);
+        incrementMatched();
     }
     else {
         //No Match
@@ -88,12 +91,24 @@ function checkCards () {
     }
 }
 
+function checkForWin () {
+    if (matched === 8) {
+        window.setTimeout(function () {
+            window.confirm('You win!  Play again?') && restartGame();
+        }, 500);
+    }
+}
+
 function clearQueue () {
     openCards = [];
 }
 
 function hideCard (card) {
     card.classList.remove('open', 'show');
+}
+
+function incrementMatched () {
+    matched++;
 }
 
 function incrementMoves () {
@@ -110,6 +125,10 @@ function queueCard (card) {
     openCards.push(card);
 }
 
+function resetMatched () {
+    matched = 0;
+}
+
 function resetMoves () {
     moves = -1;
     incrementMoves();
@@ -119,6 +138,7 @@ function restartGame () {
     clearQueue();
     shuffleCards();
     resetMoves();
+    resetMatched();
 }
 
 function showCard (card) {
