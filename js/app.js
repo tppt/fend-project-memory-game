@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 let cards = Array.from(document.querySelectorAll('.card'));
+let openCards = [];
 
 /*
  * Display the cards on the page
@@ -52,10 +53,53 @@ function shuffle(array) {
  */
 document.querySelector('.deck').addEventListener('click', function (event) {
     const card = event.target;
+    //If we click on a non-card element, such as the <i> tag, ignore it.
     if (!card.classList.contains('card')) return;
+    //If a card element has more classes than just "card", 
+    //then it is already showing, and we can ignore it.
+    if (card.classList.length > 1) return;
 
     showCard(card);
+    queueCard(card);
+
+    if (openCards.length === 2) {
+        checkCards();
+        clearQueue();
+    }
 });
+
+function checkCards () {
+    const card1 = openCards[0];
+    const card2 = openCards[1];
+    
+    if (card1.innerHTML === card2.innerHTML) {
+        //Match
+        lockCard(card1);
+        lockCard(card2);
+    }
+    else {
+        //No Match
+        hideCard(card1);
+        hideCard(card2);
+    }
+}
+
+function clearQueue () {
+    openCards = [];
+}
+
+function hideCard (card) {
+    card.classList.remove('open', 'show');
+}
+
+function lockCard (card) {
+    hideCard(card);
+    card.classList.add('match');
+}
+
+function queueCard (card) {
+    openCards.push(card);
+}
 
 function showCard (card) {
     card.classList.add('open', 'show');
