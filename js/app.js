@@ -3,6 +3,7 @@
  */
 let cards = Array.from(document.querySelectorAll('.card'));
 let openCards = [];
+let moves = 0;
 
 /*
  * Display the cards on the page
@@ -65,6 +66,7 @@ document.querySelector('.deck').addEventListener('click', function (event) {
     if (openCards.length === 2) {
         checkCards();
         clearQueue();
+        incrementMoves();
     }
 });
 
@@ -94,6 +96,11 @@ function hideCard (card) {
     card.classList.remove('open', 'show');
 }
 
+function incrementMoves () {
+    moves++;
+    document.querySelector('.moves').textContent = moves;
+}
+
 function lockCard (card) {
     hideCard(card);
     card.classList.add('match');
@@ -103,11 +110,23 @@ function queueCard (card) {
     openCards.push(card);
 }
 
+function resetMoves () {
+    moves = -1;
+    incrementMoves();
+}
+
 function restartGame () {
     clearQueue();
     shuffleCards();
+    resetMoves();
 }
 
 function showCard (card) {
     card.classList.add('open', 'show');
 }
+
+function init () {
+    restartGame();
+}
+
+init();
