@@ -22,7 +22,7 @@ function shuffleCards () {
 
 //Shuffle deck when we click the restart button.
 document.querySelector('.restart').addEventListener('click', function (event) {
-    shuffleCards();
+    restartGame();
 });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -101,6 +101,11 @@ function lockCard (card) {
 
 function queueCard (card) {
     openCards.push(card);
+}
+
+function restartGame () {
+    clearQueue();
+    shuffleCards();
 }
 
 function showCard (card) {
