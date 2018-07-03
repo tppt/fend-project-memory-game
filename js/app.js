@@ -79,8 +79,10 @@ function checkCards () {
     }
     else {
         //No Match
-        hideCard(card1);
-        hideCard(card2);
+        window.setTimeout(function () {
+            hideCard(card1);
+            hideCard(card2);
+        }, 1000);
     }
 }
 
