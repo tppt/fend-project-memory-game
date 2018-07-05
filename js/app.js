@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 let cards = Array.from(document.querySelectorAll('.card'));
+let stars = Array.from(document.querySelectorAll('.star'));
 let openCards = [];
 let moves = 0;
 let matched = 0;
@@ -68,6 +69,7 @@ document.querySelector('.deck').addEventListener('click', function (event) {
         checkCards();
         clearQueue();
         incrementMoves();
+        updateStarRating();
         checkForWin();
     }
 });
@@ -139,10 +141,32 @@ function restartGame () {
     shuffleCards();
     resetMoves();
     resetMatched();
+    updateStarRating();
 }
 
 function showCard (card) {
     card.classList.add('open', 'show');
+}
+
+function updateStarRating () {
+    let loops = 3;
+
+    if (moves >= 8) {
+        loops--;
+    }
+    if (moves >= 16) {
+        loops--;
+    }
+    if (moves >= 24) {
+        loops--;
+    }
+
+    const starList = document.querySelector('.stars');
+    starList.innerHTML = '';
+
+    for (let i = 0; i < loops; i++) {
+        starList.appendChild(stars[i]);
+    }
 }
 
 function init () {
