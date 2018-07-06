@@ -193,13 +193,13 @@ function stopClock () {
 function updateStarRating () {
     let loops = 3;
 
-    if (moves >= 8) {
+    if (moves >= 17) {
         loops--;
     }
-    if (moves >= 16) {
+    if (moves >= 25) {
         loops--;
     }
-    if (moves >= 24) {
+    if (moves >= 33) {
         loops--;
     }
 
