@@ -102,8 +102,12 @@ function checkCards () {
 
 function checkForWin () {
     if (matched === 8) {
+        stopClock();
         window.setTimeout(function () {
-            window.confirm('You win!  Play again?') && restartGame();
+            const elapsedTime = document.querySelector('.clock').textContent;
+
+            let message = `You won after ${elapsedTime}!  Play again?`
+            window.confirm(message) && restartGame();
         }, 500);
     }
 }
