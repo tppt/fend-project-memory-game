@@ -10,42 +10,9 @@ let timerId;
 let seconds = 0;
 let minutes = 0;
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-function shuffleCards () {
-    cards = shuffle(cards);
-    const deck = document.querySelector('.deck');
-    deck.innerHTML = '';
-    for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.remove('open', 'show', 'match');
-        deck.appendChild(cards[i]);
-    }
-}
-
-//Shuffle deck when we click the restart button.
 document.querySelector('.restart').addEventListener('click', function (event) {
     restartGame();
 });
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -180,6 +147,37 @@ function restartGame () {
 
 function showCard (card) {
     card.classList.add('open', 'show');
+}
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+function shuffleCards () {
+    cards = shuffle(cards);
+    const deck = document.querySelector('.deck');
+    deck.innerHTML = '';
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('open', 'show', 'match');
+        deck.appendChild(cards[i]);
+    }
 }
 
 function startClock () {
