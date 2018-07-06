@@ -6,6 +6,9 @@ let stars = Array.from(document.querySelectorAll('.star'));
 let openCards = [];
 let moves = 0;
 let matched = 0;
+let timerId;
+let seconds = 0;
+let minutes = 0;
 
 /*
  * Display the cards on the page
@@ -62,6 +65,10 @@ document.querySelector('.deck').addEventListener('click', function (event) {
     //then it is already showing, and we can ignore it.
     if (card.classList.length > 1) return;
 
+    if (!timerId) {
+        startClock();
+    }
+
     showCard(card);
     queueCard(card);
 
@@ -109,6 +116,19 @@ function hideCard (card) {
     card.classList.remove('open', 'show');
 }
 
+function incrementClock () {
+    seconds++;
+    if (seconds === 60) {
+        minutes++;
+        seconds = 0;
+    }
+
+    const secondStr = seconds > 9 ? seconds : '0' + seconds;
+    const minuteStr = minutes > 9 ? minutes : '0' + minutes;
+
+    document.querySelector('.clock').textContent = `${minuteStr} : ${secondStr}`;
+}
+
 function incrementMatched () {
     matched++;
 }
@@ -146,6 +166,16 @@ function restartGame () {
 
 function showCard (card) {
     card.classList.add('open', 'show');
+}
+
+function startClock () {
+    timerId = setInterval(function () {
+        incrementClock();
+    }, 1000);
+}
+
+function stopClock () {
+    clearInterval(timerId);
 }
 
 function updateStarRating () {
