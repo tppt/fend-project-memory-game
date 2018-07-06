@@ -105,8 +105,9 @@ function checkForWin () {
         stopClock();
         window.setTimeout(function () {
             const elapsedTime = document.querySelector('.clock').textContent;
+            const starCount = document.querySelectorAll('.star').length;
+            const message = `You won after ${elapsedTime}!  You had a rating of ${starCount} stars!  Play again?`;
 
-            let message = `You won after ${elapsedTime}!  Play again?`
             window.confirm(message) && restartGame();
         }, 500);
     }
