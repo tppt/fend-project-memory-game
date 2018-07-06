@@ -147,6 +147,13 @@ function queueCard (card) {
     openCards.push(card);
 }
 
+function resetClock () {
+    timerId = null;
+    seconds = 0;
+    minutes = 0;
+    document.querySelector('.clock').textContent = '00 : 00';
+}
+
 function resetMatched () {
     matched = 0;
 }
@@ -162,6 +169,8 @@ function restartGame () {
     resetMoves();
     resetMatched();
     updateStarRating();
+    stopClock();
+    resetClock();
 }
 
 function showCard (card) {
