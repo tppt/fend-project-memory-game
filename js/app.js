@@ -214,9 +214,6 @@ function updateStarRating () {
     if (moves >= 25) {
         loops--;
     }
-    if (moves >= 33) {
-        loops--;
-    }
 
     const starList = document.querySelector('.stars');
     starList.innerHTML = '';
