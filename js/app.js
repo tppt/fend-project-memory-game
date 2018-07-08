@@ -9,6 +9,7 @@ let matched = 0;
 let timerId;
 let seconds = 0;
 let minutes = 0;
+let flippingIsPaused = false;
 
 document.querySelector('.restart').addEventListener('click', function (event) {
     restartGame();
@@ -31,6 +32,9 @@ document.querySelector('.deck').addEventListener('click', function (event) {
     //If a card element has more classes than just "card", 
     //then it is already showing, and we can ignore it.
     if (card.classList.length > 1) return;
+    //If two cards are showing already, and they dont match,
+    //ignore other clicks until they flip back over.
+    if (flippingIsPaused) return;
 
     if (!timerId) {
         startClock();
@@ -40,6 +44,7 @@ document.querySelector('.deck').addEventListener('click', function (event) {
     queueCard(card);
 
     if (openCards.length === 2) {
+        pauseFlipping();
         checkCards();
         clearQueue();
         incrementMoves();
@@ -57,12 +62,14 @@ function checkCards () {
         lockCard(card1);
         lockCard(card2);
         incrementMatched();
+        unpauseFlipping();
     }
     else {
         //No Match
         window.setTimeout(function () {
             hideCard(card1);
             hideCard(card2);
+            unpauseFlipping();
         }, 1000);
     }
 }
@@ -113,6 +120,10 @@ function incrementMoves () {
 function lockCard (card) {
     hideCard(card);
     card.classList.add('match');
+}
+
+function pauseFlipping () {
+    flippingIsPaused = true;
 }
 
 function queueCard (card) {
@@ -188,6 +199,10 @@ function startClock () {
 
 function stopClock () {
     clearInterval(timerId);
+}
+
+function unpauseFlipping () {
+    flippingIsPaused = false;
 }
 
 function updateStarRating () {
