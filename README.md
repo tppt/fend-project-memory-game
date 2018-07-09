@@ -5,9 +5,15 @@ Utilizing HTML, CSS, and JavaScript to practice ability with vanilla JS.
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [How to Play](#how to play)
+* [Dependencies](#dependencies)
 
 ## Instructions
 
-To play, drag the index.html file into your browser.
+To play, first clone the repository, then drag the index.html file into your local browser.
 
-Rules: Click a card to flip it.  Match two cards to keep them flipped.  Match all cards to win.
+## How to Play
+Click a card to flip it.  Match two cards to keep them flipped.  Match all cards to win.
+
+#Dependencies
+No major dependencies; a vanilla JS app.
